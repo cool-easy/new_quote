@@ -1,5 +1,5 @@
 #ifndef _SHANGHAI_EXCHANGE_H_
-#define _SHANGHAIS_EXCHANGE_H_
+#define _SHANGHAI_EXCHANGE_H_
 
 #include <functional>
 
@@ -8,18 +8,15 @@
 
 namespace stock {
 
-void func() {}
-
 template <typename T>
 class StockData;
 
 class ShangHaiExchange {
  public:
   ShangHaiExchange() {
-    std::function<void(const StockData<ShangHai>*)> p = std::bind(&ShangHaiExchange::ShangHaiLine,
-		                                                 this,
-								 nullptr);
-    stock_line_.RegisterCallback(std::bind(&ShangHaiExchange::ShangHaiLine, this, nullptr));
+    stock_line_.RegisterCallback<StockData<ShangHai>>(std::bind(&ShangHaiExchange::ShangHaiLine,
+			                   this,
+					   std::placeholders::_1));
   }
 
   void ShangHaiLine(const StockData<ShangHai>* data) {

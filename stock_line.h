@@ -17,11 +17,11 @@ class StockDataBase;
 
 class StockLine {
  public:
-  using CallbackSet = std::map<const StockDataDescriptorBase*, Callback>;
+  using CallbackSet = std::map<const StockDataDescriptorBase*, Callback*>;
 
   template <typename T>
   void RegisterCallback(typename CallbackT<T>::Functor&& functor) {
-    callback_set_[T::descriptor()] = functor;
+    callback_set_[T::descriptor()] = new CallbackT<T>(std::move(functor));
   }
 
   void Run(const StockDataBase* data) {

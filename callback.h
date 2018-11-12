@@ -10,8 +10,6 @@ namespace stock {
 class Callback {
  public:
   virtual void Run(const StockDataBase* data) = 0;
-
- private:
   virtual ~Callback() {}
 };  // class StockLineCallback
 
